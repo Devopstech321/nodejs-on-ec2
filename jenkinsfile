@@ -1,0 +1,23 @@
+pipeline
+{
+    agent any
+    stages
+    {
+        stage('scm checkout')
+        {
+            steps{git branch: 'master', url: 'https://github.com/Devopstech321/nodejs-on-ec2.git'}
+        }
+        stage('versions')
+        {
+            steps{sh 'npm version'}
+        }
+        stage('Build images')
+        {
+            steps{sh 'docker build -t node-app .'}
+        }
+        stage('deploy on docker container')
+        {
+            steps{sh 'docker run -itd --name nodeapp -p 4000:4000 node-app'}
+        }
+    }
+}
