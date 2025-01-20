@@ -21,9 +21,5 @@ pipeline
              sh 'docker push 123doc123/nodejsapp:v1'
 }}
         }
-        stage('deploy on docker container')
-        {
-            steps{sh 'docker run -itd --name nodeapp -p 4000:4000 node-app'}
-        }
     }
 }
